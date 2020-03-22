@@ -1,0 +1,13 @@
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\bin\Debug\TextEditor.exe.config
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\bin\Debug\TextEditor.exe
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\bin\Debug\TextEditor.pdb
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.csprojAssemblyReference.cache
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.Form1.resources
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.Properties.Resources.resources
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.GenerateResource.cache
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.CoreCompileInputs.cache
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.exe
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.pdb
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\bin\Debug\FastColoredTextBox.dll
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\bin\Debug\FastColoredTextBox.xml
+E:\ВУЗ\6 семестр\ТРПЗ3\lab\TextEditor\TextEditor\obj\Debug\TextEditor.csproj.CopyComplete
