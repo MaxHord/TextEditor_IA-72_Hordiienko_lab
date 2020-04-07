@@ -26,18 +26,7 @@ namespace TextEditor
             {
                 //open file
                 StreamReader sr = new StreamReader(of.FileName);
-                //if (Path.GetExtension(of.FileName) == ".js")
-                //{
-                //    contextFile.Language = Language.JS;
-                //}
-                //else if (Path.GetExtension(of.FileName) == ".cs")
-                //{
-                //    contextFile.Language = Language.CSharp;
-                //}
-                //else
-                //{
-                //    contextFile.Language = Language.Custom;
-                //}
+
                 if (Path.GetExtension(of.FileName) == ".js")
                 {
                     type.TypeSyn = new JsType();
@@ -46,6 +35,21 @@ namespace TextEditor
                 else if (Path.GetExtension(of.FileName) == ".cs")
                 {
                     type.TypeSyn = new Csharp();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if(Path.GetExtension(of.FileName) == ".html")
+                {
+                    type.TypeSyn = new HTMLType();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if (Path.GetExtension(of.FileName) == ".php")
+                {
+                    type.TypeSyn = new PHPType();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if (Path.GetExtension(of.FileName) == ".sql")
+                {
+                    type.TypeSyn = new SQLType();
                     contextFile.Language = type.LanguageType();
                 }
                 else

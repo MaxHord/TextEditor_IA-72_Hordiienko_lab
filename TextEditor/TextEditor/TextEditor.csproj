@@ -56,10 +56,13 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="HTMLType.cs" />
     <Compile Include="IType.cs" />
     <Compile Include="JsType.cs" />
+    <Compile Include="PHPType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLType.cs" />
     <Compile Include="Type.cs" />
     <Compile Include="WorkWithFile.cs" />
     <EmbeddedResource Include="Form1.resx">
