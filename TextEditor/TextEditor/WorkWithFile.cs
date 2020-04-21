@@ -9,18 +9,18 @@ using System.Windows.Forms;
 
 namespace TextEditor
 {
-    public static class WorkWithFile
+    public class WorkWithFile
     {
 
-        public static Type type = new Type();
-        public static string fileName;
-        public static FastColoredTextBox contextFile = new FastColoredTextBox();
-        public static void OpenDlg()
+        public Type type = new Type();
+        public string fileName;
+        public FastColoredTextBox contextFile = new FastColoredTextBox();
+        public void OpenDlg()
         {
             //create new open file dialog
             OpenFileDialog of = new OpenFileDialog();
             //open file dialog files extension filter
-            of.Filter = "Text File|*.txt|JS File|*.js|HTML File|*.html|Any File|*.*";
+            of.Filter = "Text File|*.txt|JS File|*.js|HTML File|*.html|Csharp File|*.cs*|SQL File|*.sql*|Any File|*.*";
             //if after showing dialog, clicked ok
             if (of.ShowDialog() == DialogResult.OK)
             {
@@ -63,6 +63,64 @@ namespace TextEditor
                 fileName = of.FileName;
             }
             
+        }
+        public void SaveDlg(/*FastColoredTextBox _contextFile*/)
+        {
+            //this.contextFile = _contextFile;
+            //new save file dialog
+            SaveFileDialog sf = new SaveFileDialog();
+            //filter
+            sf.Filter = "Text File|*.txt|JS File|*.js|HTML File|*.html|Csharp File|*.cs*|SQL File|*.sql*|Any File|*.*";
+            //if after showing dialog, user clicked ok
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sr = new StreamWriter(sf.FileName);
+                sr.Write(contextFile.Text);
+                fileName = sf.FileName;
+                sr.Close();
+                OpenDlgName();
+            }
+        }
+
+        public void OpenDlgName()
+        {
+
+                //open file
+                StreamReader sr = new StreamReader(fileName);
+
+                if (Path.GetExtension(fileName) == ".js")
+                {
+                    type.TypeSyn = new JsType();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if (Path.GetExtension(fileName) == ".cs")
+                {
+                    type.TypeSyn = new Csharp();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if (Path.GetExtension(fileName) == ".html")
+                {
+                    type.TypeSyn = new HTMLType();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if (Path.GetExtension(fileName) == ".php")
+                {
+                    type.TypeSyn = new PHPType();
+                    contextFile.Language = type.LanguageType();
+                }
+                else if (Path.GetExtension(fileName) == ".sql")
+                {
+                    type.TypeSyn = new SQLType();
+                    contextFile.Language = type.LanguageType();
+                }
+                else
+                {
+                    contextFile.Language = Language.Custom;
+                }
+                //place file text to text box
+                contextFile.Text = sr.ReadToEnd();
+                //close
+                sr.Close();
         }
     }
 }

@@ -8,11 +8,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using TextEditor.Commands;
 
 namespace TextEditor
 {
     public partial class Form1 : Form
     {
+        public static WorkWithFile work = new WorkWithFile();
+        public static SaveCommand saveCommand = new SaveCommand(work);
+        public static OpenCommand openCommand = new OpenCommand(work);
+
         public Form1()
         {
             InitializeComponent();
@@ -23,45 +28,14 @@ namespace TextEditor
             //remove all text from text box
             fastColoredTextBox1.Text = "";
         }
-        //private void OpenDlg()
-        //{
-        //    //create new open file dialog
-        //    OpenFileDialog of = new OpenFileDialog();
-        //    //open file dialog files extension filter
-        //    of.Filter = "Text File|*.txt|JS File|*.js|HTML File|*.html|Any File|*.*";
-
-        //    //if after showing dialog, clicked ok
-        //    if (of.ShowDialog() == DialogResult.OK)
-        //    {
-        //        //open file
-        //        StreamReader sr = new StreamReader(of.FileName);
-        //        if (Path.GetExtension(of.FileName) == ".js")
-        //        {
-        //            fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.JS;
-        //        }
-        //        else if (Path.GetExtension(of.FileName) == ".cs")
-        //        {
-        //            fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.CSharp;
-        //        }
-        //        else
-        //        {
-        //            fastColoredTextBox1.Language = FastColoredTextBoxNS.Language.Custom;
-        //        }
-        //        //place file text to text box
-        //        fastColoredTextBox1.Text = sr.ReadToEnd();
-        //        //close
-        //        sr.Close();
-        //        //text of this window = path of cirrently opened file
-        //        this.Text = of.FileName;
-        //    }
-        //}
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            WorkWithFile.OpenDlg();
-            fastColoredTextBox1.Language = WorkWithFile.contextFile.Language;
-            fastColoredTextBox1.Text = WorkWithFile.contextFile.Text;
-            this.Text = WorkWithFile.fileName;
+            //Command
+            openCommand.Execute();
+            fastColoredTextBox1.Language = work.contextFile.Language;
+            fastColoredTextBox1.Text = work.contextFile.Text;
+            this.Text = work.fileName;
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,28 +47,19 @@ namespace TextEditor
                 sw.Write(fastColoredTextBox1.Text);
                 sw.Close();
             }
-            catch { /*OpenDlg();*/ }
+            catch { saveCommand.Execute(); }
            
         }
 
-        //save file method
-        private void SaveDlg()
-        {
-            //new save file dialog
-            SaveFileDialog sf = new SaveFileDialog();
-            //filter
-            sf.Filter = "Text File|*.txt|JS File|*.js|HTML File|*.html|Any File|*.*";
-            //if after showing dialog, user clicked ok
-            if (sf.ShowDialog() == DialogResult.OK)
-            {
-                StreamWriter sr = new StreamWriter(sf.FileName);
-                sr.Write(fastColoredTextBox1.Text);
-                sr.Close();
-            }
-        }
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveDlg();
+            work.contextFile.Text = fastColoredTextBox1.Text;
+            work.fileName = this.Text;
+            //Command
+            saveCommand.Execute();
+
+            fastColoredTextBox1.Text = work.contextFile.Text;
+            this.Text = work.fileName;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
