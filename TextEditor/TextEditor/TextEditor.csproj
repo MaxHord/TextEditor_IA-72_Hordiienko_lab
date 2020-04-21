@@ -52,6 +52,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\OpenCommand.cs" />
     <Compile Include="Commands\SaveCommand.cs" />
+    <Compile Include="Invoker.cs" />
     <Compile Include="Syntax\Csharp.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

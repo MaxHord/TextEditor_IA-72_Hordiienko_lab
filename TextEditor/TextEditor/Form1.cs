@@ -15,8 +15,10 @@ namespace TextEditor
     public partial class Form1 : Form
     {
         public static WorkWithFile work = new WorkWithFile();
-        public static SaveCommand saveCommand = new SaveCommand(work);
+        //public static SaveCommand saveCommand = new SaveCommand(work);
         public static OpenCommand openCommand = new OpenCommand(work);
+        public static ICommand command = new SaveCommand(work);
+        public static Invoker invoker = new Invoker();
 
         public Form1()
         {
@@ -47,7 +49,9 @@ namespace TextEditor
                 sw.Write(fastColoredTextBox1.Text);
                 sw.Close();
             }
-            catch { saveCommand.Execute(); }
+            catch { /*saveCommand.Execute();*/ invoker.StoreCommand(command);
+                invoker.ExecuteCommand();
+            }
            
         }
 
@@ -56,7 +60,9 @@ namespace TextEditor
             work.contextFile.Text = fastColoredTextBox1.Text;
             work.fileName = this.Text;
             //Command
-            saveCommand.Execute();
+            //saveCommand.Execute();
+            invoker.StoreCommand(command);
+            invoker.ExecuteCommand();
 
             fastColoredTextBox1.Text = work.contextFile.Text;
             this.Text = work.fileName;
