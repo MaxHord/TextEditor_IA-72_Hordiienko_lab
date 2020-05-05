@@ -14,6 +14,7 @@ namespace TextEditor
 
         public Type type = new Type();
         public string fileName;
+        public string dir;
         public FastColoredTextBox contextFile = new FastColoredTextBox();
         public void OpenDlg()
         {
@@ -61,6 +62,7 @@ namespace TextEditor
                 //close
                 sr.Close();
                 fileName = of.FileName;
+                dir = of.FileName.Remove(of.FileName.IndexOf(of.SafeFileName));
             }
             
         }

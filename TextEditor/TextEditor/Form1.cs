@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using TextEditor.Commands;
+using TextEditor.observer;
 
 namespace TextEditor
 {
     public partial class Form1 : Form
     {
         public static WorkWithFile work = new WorkWithFile();
-        //public static SaveCommand saveCommand = new SaveCommand(work);
         public static OpenCommand openCommand = new OpenCommand(work);
         public static ICommand command = new SaveCommand(work);
         public static Invoker invoker = new Invoker();
+        public static string directory = @"C:\Users\Max\Desktop\trpz";
+        public FileStatusDelegate fileStatusDelegate = new FileStatusDelegate(directory, new Subscriber(String.Empty).ItIsSubscriber);
 
         public Form1()
         {
@@ -38,6 +40,9 @@ namespace TextEditor
             fastColoredTextBox1.Language = work.contextFile.Language;
             fastColoredTextBox1.Text = work.contextFile.Text;
             this.Text = work.fileName;
+            directory = work.dir;
+            fileStatusDelegate = new FileStatusDelegate(directory, new Subscriber(String.Empty).ItIsSubscriber);
+            MessageBox.Show($"{directory}");
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
