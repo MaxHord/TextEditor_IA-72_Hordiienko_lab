@@ -8,15 +8,14 @@ using System.Windows.Forms;
 
 namespace TextEditor.observer
 {
-    public class FileStatusDelegate : IDisposable
+    public class FileStatusEvent : IDisposable
     {
-        private readonly Action<string> subscriber;
+        public  EventHandler<string> RemoveFiles;
         private readonly System.Timers.Timer timer;
         private readonly Monitoring monitoring;
 
-        public FileStatusDelegate(string directory, Action<string> subscriber)
+        public FileStatusEvent(string directory)
         {
-            this.subscriber = subscriber;
             monitoring = new Monitoring(directory);
 
             if (monitoring.StartMonitoring())
@@ -36,7 +35,8 @@ namespace TextEditor.observer
         {
             foreach (var fileName in monitoring.DeletedFiles())
             {
-                subscriber(fileName);
+                var handler = RemoveFiles;
+                handler?.Invoke(this, fileName);
             }
         }
 

@@ -16,9 +16,5 @@ namespace TextEditor.observer
             this.name = name;
         }
 
-        public void ItIsSubscriber(string fileName)
-        {
-            MessageBox.Show($"{name} {fileName} был удален");
-        }
     }
  }

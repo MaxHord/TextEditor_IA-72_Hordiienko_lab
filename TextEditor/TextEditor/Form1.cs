@@ -20,11 +20,14 @@ namespace TextEditor
         public static ICommand command = new SaveCommand(work);
         public static Invoker invoker = new Invoker();
         public static string directory = @"C:\Users\Max\Desktop\trpz";
-        public FileStatusDelegate fileStatusDelegate = new FileStatusDelegate(directory, new Subscriber(String.Empty).ItIsSubscriber);
+        public static FileStatusEventObservable provider = new FileStatusEventObservable(directory);
+        public static Observer observer = new Observer();
+    
 
         public Form1()
         {
             InitializeComponent();
+            observer.Subscribe(provider);
         }
         
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
@@ -41,8 +44,9 @@ namespace TextEditor
             fastColoredTextBox1.Text = work.contextFile.Text;
             this.Text = work.fileName;
             directory = work.dir;
-            fileStatusDelegate = new FileStatusDelegate(directory, new Subscriber(String.Empty).ItIsSubscriber);
-            MessageBox.Show($"{directory}");
+            observer.Unsubscribe();
+            provider = new FileStatusEventObservable(directory);
+            observer.Subscribe(provider);
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -55,7 +59,8 @@ namespace TextEditor
                 sw.Close();
             }
             catch { /*saveCommand.Execute();*/ invoker.StoreCommand(command);
-                invoker.ExecuteCommand();
+            //    invoker.ExecuteCommand();
+            work.SaveDlg();
             }
            
         }
@@ -65,9 +70,10 @@ namespace TextEditor
             work.contextFile.Text = fastColoredTextBox1.Text;
             work.fileName = this.Text;
             //Command
-            //saveCommand.Execute();
-            invoker.StoreCommand(command);
-            invoker.ExecuteCommand();
+            //invoker.StoreCommand(command);
+            //invoker.ExecuteCommand();
+
+            work.Algoritm();
 
             fastColoredTextBox1.Text = work.contextFile.Text;
             this.Text = work.fileName;

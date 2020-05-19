@@ -9,9 +9,8 @@ using System.Windows.Forms;
 
 namespace TextEditor
 {
-    public class WorkWithFile
+    public class WorkWithFile : AbstractWork
     {
-
         public Type type = new Type();
         public string fileName;
         public string dir;
@@ -66,7 +65,7 @@ namespace TextEditor
             }
             
         }
-        public void SaveDlg(/*FastColoredTextBox _contextFile*/)
+        public override void SaveDlg(/*FastColoredTextBox _contextFile*/)
         {
             //this.contextFile = _contextFile;
             //new save file dialog
@@ -84,7 +83,7 @@ namespace TextEditor
             }
         }
 
-        public void OpenDlgName()
+        public override void OpenDlgName()
         {
 
                 //open file
